@@ -16,7 +16,7 @@ body {
 
 .app-container {
     background-color: rgba(217, 164, 164, 0.92);
-    padding: 30px;
+    padding: 25px;
     height:70%;
     width: 20%;
     border-radius: 12px;
@@ -55,11 +55,11 @@ button {
 
 button:hover {
     background-color: #1d4ed8;
-    font-size:17px;
+    font-size:14px;
 }
 
 #weatherResult {
-    margin-bottom: 50px;
+    margin-bottom: 49px;
     margin-top:15px;
     padding: 15%;
     background-color: #f1f5f9;
@@ -68,7 +68,8 @@ button:hover {
 }
 
 #weatherResult img {
-    width: 50px;
+    width: 45px;
+    height:30px;
     
 }
 
