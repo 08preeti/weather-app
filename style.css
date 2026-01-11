@@ -68,13 +68,13 @@ button:hover {
 }
 
 #weatherResult img {
-    width: 70px;
+    width: 55px;
     
 }
 
 #cityInput{
     padding: 7px;
-    font-size:27px;
+    font-size:20px;
     width:97%;
 
 }
