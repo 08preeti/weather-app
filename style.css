@@ -15,20 +15,22 @@ body {
 
 
 .app-container {
-    background-color: rgba(255, 255, 255, 0.92);
+    background-color: rgba(217, 164, 164, 0.92);
     padding: 30px;
     height:70%;
-    width: 390px;
+    width: 40%;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  
 }
 
 
 h1 {
     color: #123499ff;
     margin-bottom: 30%;
-    margin-top:25%;
+    margin-top:15%;
+    font-size:40px;
 }
 
 input {
@@ -43,7 +45,7 @@ button {
     margin-top: 15px;
     padding: 15px;
     width: 100%;
-    font-size: 20px;
+    font-size: 24px;
     background-color: #2563eb;
     color: white;
     border: none;
@@ -53,13 +55,16 @@ button {
 
 button:hover {
     background-color: #1d4ed8;
+    font-size:20px;
 }
 
 #weatherResult {
-    margin-bottom: 7px;
-    padding: 15px;
+    margin-bottom: 50px;
+    margin-top:15px;
+    padding: 15%;
     background-color: #f1f5f9;
     border-radius: 8px;
+    font-size:22px;
 }
 
 #weatherResult img {
@@ -68,10 +73,11 @@ button:hover {
 }
 
 #cityInput{
-    padding: 16px;
+    padding: 5px;
+    font-size:24px;
 
 }
 
 #hii{
-    font-size:19px;
+    font-size:30px;
 }
