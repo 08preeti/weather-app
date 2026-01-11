@@ -30,7 +30,7 @@ h1 {
     color: #123499ff;
     margin-bottom: 30%;
     margin-top:15%;
-    font-size:40px;
+    font-size:35px;
 }
 
 input {
@@ -55,7 +55,7 @@ button {
 
 button:hover {
     background-color: #1d4ed8;
-    font-size:20px;
+    font-size:17px;
 }
 
 #weatherResult {
@@ -68,7 +68,7 @@ button:hover {
 }
 
 #weatherResult img {
-    width: 55px;
+    width: 50px;
     
 }
 
@@ -80,5 +80,5 @@ button:hover {
 }
 
 #hii{
-    font-size:30px;
+    font-size:25px;
 }
