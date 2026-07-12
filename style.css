@@ -1,85 +1,361 @@
+:root {
+  --sky-top: #1b2a44;
+  --sky-mid: #2c4266;
+  --sky-bottom: #46618a;
+  --ink: #0e1621;
+  --paper: #eef2f6;
+  --paper-dim: #aab6c4;
+  --amber: #f2a65a;
+  --teal: #7fc4bd;
+  --hairline: rgba(238, 242, 246, 0.16);
+  --glass: rgba(14, 22, 33, 0.42);
+  --glass-border: rgba(238, 242, 246, 0.14);
+  --transition-sky: background 1.4s ease;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    background-image: url("images/climate.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: var(--paper);
+  overflow-x: hidden;
+  position: relative;
 }
 
+/* ---------- Sky background ---------- */
 
-.app-container {
-    background-color: rgba(217, 164, 164, 0.92);
-    padding: 25px;
-    height:70%;
-    width: 20%;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-bottom) 100%);
+  transition: var(--transition-sky);
+  overflow: hidden;
 }
 
-
-h1 {
-    color: #123499ff;
-    margin-bottom: 30%;
-    margin-top:15%;
-    font-size:35px;
+.drift {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  background: radial-gradient(circle, rgba(255,255,255,0.5), transparent 70%);
 }
 
-input {
-    width: 90%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+.drift--a {
+  width: 46vw;
+  height: 46vw;
+  top: -12vw;
+  left: -10vw;
+  animation: drift-a 42s ease-in-out infinite alternate;
 }
 
-button {
-    margin-top: 15px;
-    padding: 15px;
+.drift--b {
+  width: 34vw;
+  height: 34vw;
+  bottom: -10vw;
+  right: -8vw;
+  animation: drift-b 50s ease-in-out infinite alternate;
+}
+
+@keyframes drift-a {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(6vw, 8vw); }
+}
+
+@keyframes drift-b {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-5vw, -6vw); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift { animation: none; }
+}
+
+/* ---------- Panel ---------- */
+
+.panel {
+  width: min(420px, 92vw);
+  margin: 32px 0;
+  padding: 32px 28px 28px;
+  border-radius: 20px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.55);
+}
+
+.panel__header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--teal);
+}
+
+.app-title {
+  margin: 0;
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Search ---------- */
+
+.search {
+  display: flex;
+  gap: 8px;
+}
+
+#cityInput {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: none;
+  border-radius: 10px;
+  outline-offset: 2px;
+}
+
+#cityInput::placeholder {
+  color: #64748b;
+}
+
+#getWeatherBtn {
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "IBM Plex Mono", monospace;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  background: var(--amber);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+
+#getWeatherBtn:hover { background: #f6b876; }
+#getWeatherBtn:active { transform: translateY(1px); }
+#getWeatherBtn:disabled { opacity: 0.6; cursor: progress; }
+
+.search__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--paper-dim);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: transparent;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.link-btn:hover:not(:disabled) {
+  color: var(--paper);
+  text-decoration-color: currentColor;
+}
+
+.link-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+  text-decoration: none;
+}
+
+/* ---------- Focus visibility ---------- */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ---------- Errors ---------- */
+
+.form-error {
+  min-height: 18px;
+  margin: 10px 2px 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: #ff9b8a;
+}
+
+/* ---------- Reading ---------- */
+
+.reading {
+  margin-top: 22px;
+}
+
+.reading__empty {
+  text-align: center;
+  color: var(--paper-dim);
+  font-size: 14px;
+  padding: 30px 0 10px;
+}
+
+.reading__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.reading__place {
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--paper-dim);
+  text-transform: uppercase;
+}
+
+.reading__desc {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--paper);
+  text-transform: capitalize;
+}
+
+.reading__icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.35));
+}
+
+.reading__temp {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 1;
+  margin: 6px 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.reading__temp button {
+  border: none;
+  background: none;
+  color: var(--teal);
+  font-family: "Fraunces", serif;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 0 0 0 6px;
+}
+
+.reading__feels {
+  margin: 2px 0 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: var(--paper-dim);
+}
+
+.hairline {
+  border: none;
+  border-top: 1px solid var(--hairline);
+  margin: 18px 0;
+}
+
+/* ---------- Instrument grid ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+}
+
+.stat {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.stat__label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--paper-dim);
+  text-transform: uppercase;
+}
+
+.stat__value {
+  font-size: 17px;
+  margin-top: 2px;
+  color: var(--paper);
+}
+
+/* ---------- Sun arc ---------- */
+
+.arc-wrap {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.arc-wrap svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.arc-times {
+  display: flex;
+  justify-content: space-between;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  color: var(--paper-dim);
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+/* ---------- Utility ---------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 420px) {
+  .panel { padding: 26px 20px 22px; }
+  .reading__temp { font-size: 52px; }
+}
+
+@media (max-width: 380px) {
+  .search {
+    flex-direction: column;
+  }
+  #getWeatherBtn {
     width: 100%;
-    font-size: 24px;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #1d4ed8;
-    font-size:14px;
-}
-
-#weatherResult {
-    margin-bottom: 49px;
-    margin-top:15px;
-    padding: 15%;
-    background-color: #f1f5f9;
-    border-radius: 8px;
-    font-size:22px;
-}
-
-#weatherResult img {
-    width: 45px;
-    height:30px;
-    
-}
-
-#cityInput{
-    padding: 7px;
-    font-size:20px;
-    width:97%;
-
-}
-
-#hii{
-    font-size:25px;
+  }
 }

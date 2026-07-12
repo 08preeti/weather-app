@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Weather App</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyline — Weather Instrument</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="app-container">
-        <h1>Weather App</h1>
+  <div class="sky" id="sky" aria-hidden="true">
+    <div class="drift drift--a"></div>
+    <div class="drift drift--b"></div>
+  </div>
 
-        <label id="hii">Enter City Name:</label><br><br>
-        <input type="text" id="cityInput" placeholder="Enter city name">
+  <main class="panel" role="main">
 
-        <button id="getWeatherBtn">Get Weather</button>
-        <button id="unitToggle">Switch to °F</button>
+    <header class="panel__header">
+      <p class="eyebrow">SKYLINE</p>
+      <h1 class="app-title">Weather Instrument</h1>
+    </header>
 
-        <div id="weatherResult">
-            <p id="cityName"></p>
-            <p id="temperature"></p>
-            <p id="description"></p>
-        </div>
+    <form class="search" id="searchForm">
+      <label class="sr-only" for="cityInput">City name</label>
+      <input
+        type="text"
+        id="cityInput"
+        name="city"
+        placeholder="Search a city"
+        autocomplete="off"
+        aria-describedby="formError"
+      >
+      <button type="submit" id="getWeatherBtn">
+        <span class="btn-label">Get reading</span>
+      </button>
+    </form>
+
+    <div class="search__row">
+      <button type="button" id="geoBtn" class="link-btn">Use my location</button>
+      <button type="button" id="unitToggle" class="link-btn" disabled>°C&nbsp;/&nbsp;°F</button>
     </div>
 
-    <script src="script.js"></script>
+    <p id="formError" class="form-error" role="alert" aria-live="polite"></p>
+
+    <section id="weatherResult" class="reading" aria-live="polite">
+      <p class="reading__empty">Search a city to take a reading.</p>
+    </section>
+
+  </main>
+
+<script src="script.js"></script>
 </body>
 </html>
